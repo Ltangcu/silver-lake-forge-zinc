@@ -1,0 +1,127 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg: #f3efe6;
+  --color-bg-elevated: #faf7f0;
+  --color-surface: #efe9dc;
+  --color-fg: #1c1917;
+  --color-muted: #6b645a;
+  --color-subtle: #9a9286;
+  --color-accent: #3d5a4c;
+  --color-accent-fg: #f3efe6;
+  --color-border: #d9d1c3;
+  --color-border-strong: #c4b9a8;
+  --color-danger: #8b3d32;
+  --color-habit-pine: #3d5a4c;
+  --color-habit-clay: #8b4d3b;
+  --color-habit-slate: #4d5c67;
+  --color-habit-moss: #5c6b45;
+  --color-habit-ink: #2c2a26;
+  --color-habit-sea: #2f5d56;
+  --color-habit-rust: #9a3b2f;
+  --color-habit-stone: #7a6a58;
+
+  --font-sans: "Noto Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei",
+    system-ui, sans-serif;
+  --font-serif: "Noto Serif SC", "Songti SC", "STSong", "SimSun", serif;
+  --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+
+  --shadow-card:
+    0px 0px 0px 1px rgba(28, 25, 23, 0.06),
+    0px 1px 2px -1px rgba(28, 25, 23, 0.06),
+    0px 2px 8px 0px rgba(28, 25, 23, 0.04);
+  --shadow-card-hover:
+    0px 0px 0px 1px rgba(28, 25, 23, 0.1),
+    0px 2px 8px -2px rgba(28, 25, 23, 0.08),
+    0px 8px 20px -8px rgba(28, 25, 23, 0.08);
+
+  --text-display: clamp(2rem, 1.4rem + 2.2vw, 3rem);
+  --text-title: clamp(1.35rem, 1.15rem + 0.8vw, 1.75rem);
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  html,
+  body,
+  #app {
+    min-height: 100dvh;
+    background-color: var(--color-bg);
+    color: var(--color-fg);
+  }
+
+  body {
+    font-family: var(--font-sans);
+    line-height: 1.55;
+    background-image:
+      radial-gradient(rgba(28, 25, 23, 0.028) 0.7px, transparent 0.7px);
+    background-size: 8px 8px;
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+    letter-spacing: -0.03em;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+
+  ::selection {
+    background: color-mix(in oklab, var(--color-accent) 28%, transparent);
+    color: var(--color-fg);
+  }
+}
+
+@layer utilities {
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

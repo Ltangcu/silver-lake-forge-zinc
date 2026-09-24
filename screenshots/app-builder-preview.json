@@ -1,0 +1,36 @@
+{
+  "url": "http://127.0.0.1:8080/",
+  "viewports": {
+    "desktop": {
+      "width": 1280,
+      "height": 800,
+      "status": 200,
+      "title": "日新",
+      "hasCanvas": false,
+      "bodyTextLen": 207,
+      "bodyTextHash": "6844762316fab72adc3239c7d035c4284176518fd7e438ffdce86f6fb768cef5",
+      "bodyTextPrefix": "日新 习惯 · 词句 今日 日历 词句 统计 苟日新 日日新 又日新 9月24日 星期四 今日 今日词句 目无全牛 mù wú ",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/app-builder-preview.png"
+    },
+    "mobile": {
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "title": "日新",
+      "hasCanvas": false,
+      "bodyTextLen": 187,
+      "bodyTextHash": "77c3e024e8236b4676517eb190dd20c6c668453c0e8f34ca4817500077afb800",
+      "bodyTextPrefix": "日新 9月24日 星期四 今日 今日词句 目无全牛 mù wú quán niú 庖丁眼中不再是整头牛，而是肌理缝隙。技艺纯熟到",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/app-builder-preview-mobile.png"
+    }
+  },
+  "brandWarnings": [],
+  "authWarnings": [],
+  "verdictFile": "/workspace/screenshots/app-builder-preview.json"
+}

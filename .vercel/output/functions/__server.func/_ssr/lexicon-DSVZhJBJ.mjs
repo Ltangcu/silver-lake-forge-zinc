@@ -1,0 +1,975 @@
+import { i as __toESM } from "../_runtime.mjs";
+import { u as require_react } from "../_libs/@floating-ui/react-dom+[...].mjs";
+import { N as require_jsx_runtime, d as DialogContent$1, f as DialogDescription$1, h as DialogTitle$1, l as Dialog$1, m as DialogPortal$1, p as DialogOverlay$1, u as DialogClose } from "../_libs/@radix-ui/react-alert-dialog+[...].mjs";
+import { f as Check, g as BookmarkCheck, h as Bookmark, t as X } from "../_libs/lucide-react.mjs";
+import { h as toKey, n as useStore, y as cn } from "./router-BUXqW4l2.mjs";
+import { t as Button } from "./button-Bd8MhFZt.mjs";
+import { r as KIND_LABEL } from "./types-BDzVSBvY.mjs";
+//#region node_modules/.nitro/vite/services/ssr/assets/lexicon-DSVZhJBJ.js
+var import_react = /* @__PURE__ */ __toESM(require_react());
+var import_jsx_runtime = require_jsx_runtime();
+var Dialog = Dialog$1;
+var DialogPortal = DialogPortal$1;
+function DialogOverlay({ className, ...props }) {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogOverlay$1, {
+		className: cn("fixed inset-0 z-50 bg-fg/40", className),
+		...props
+	});
+}
+function DialogContent({ className, children, ...props }) {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DialogPortal, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogOverlay, {}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DialogContent$1, {
+		className: cn("fixed top-1/2 left-1/2 z-50 w-full max-w-md -translate-x-1/2 -translate-y-1/2", "mx-4 rounded-xl bg-bg-elevated p-6 text-fg shadow-card", className),
+		...props,
+		children: [children, /* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogClose, {
+			className: "absolute top-4 right-4 rounded-sm p-1 text-muted transition-colors hover:bg-surface hover:text-fg",
+			"aria-label": "关闭",
+			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(X, { className: "size-4" })
+		})]
+	})] });
+}
+function DialogHeader({ className, ...props }) {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+		className: cn("mb-4 space-y-1 pr-6", className),
+		...props
+	});
+}
+function DialogTitle({ className, ...props }) {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogTitle$1, {
+		className: cn("font-serif text-xl font-medium tracking-tight", className),
+		...props
+	});
+}
+function DialogDescription({ className, ...props }) {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogDescription$1, {
+		className: cn("text-sm text-muted", className),
+		...props
+	});
+}
+var Input = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
+	ref,
+	className: cn("flex h-11 w-full rounded-md border border-border bg-bg-elevated px-3 text-base text-fg shadow-card", "placeholder:text-subtle", "transition-[box-shadow,border-color] duration-150", "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/35", "disabled:opacity-40", className),
+	...props
+}));
+Input.displayName = "Input";
+function WordCard({ entry, featured = false, onOpen }) {
+	const saved = useStore((s) => s.savedWordIds.includes(entry.id));
+	const learned = useStore((s) => s.learnedWordIds.includes(entry.id));
+	const toggleSaved = useStore((s) => s.toggleSaved);
+	const toggleLearned = useStore((s) => s.toggleLearned);
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("article", {
+		className: cn("relative overflow-hidden rounded-xl bg-bg-elevated p-5 shadow-card", featured && "p-6"),
+		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+			className: "mb-3 flex items-center justify-between gap-3",
+			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+				className: "rounded-sm bg-surface px-2 py-0.5 text-xs font-medium tracking-wide text-muted",
+				children: featured ? "今日词句" : KIND_LABEL[entry.kind]
+			}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				className: "flex items-center gap-1",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button, {
+					type: "button",
+					variant: "ghost",
+					size: "icon-sm",
+					"aria-label": learned ? "标为未识" : "标为已识",
+					onClick: () => toggleLearned(entry.id),
+					children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Check, { className: cn("size-4", learned ? "text-accent" : "text-subtle") })
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button, {
+					type: "button",
+					variant: "ghost",
+					size: "icon-sm",
+					"aria-label": saved ? "取消收藏" : "收藏",
+					onClick: () => toggleSaved(entry.id),
+					children: saved ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(BookmarkCheck, { className: "size-4 text-accent" }) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Bookmark, { className: "size-4 text-subtle" })
+				})]
+			})]
+		}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
+			type: "button",
+			onClick: () => onOpen?.(entry),
+			className: "w-full text-left",
+			children: [
+				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
+					className: cn("font-serif font-medium tracking-tight text-fg", featured ? "text-2xl leading-snug md:text-3xl" : "text-xl leading-snug"),
+					children: entry.text
+				}),
+				entry.subtext ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+					className: "mt-1 font-serif text-lg text-fg/80 md:text-xl",
+					children: entry.subtext
+				}) : null,
+				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+					className: "mt-2 text-sm text-subtle",
+					children: entry.pinyin
+				}),
+				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+					className: "mt-3 text-sm leading-relaxed text-muted",
+					children: entry.meaning
+				}),
+				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+					className: "mt-3 text-xs text-subtle",
+					children: entry.source
+				})
+			]
+		})]
+	});
+}
+function WordDetail({ entry, onClose }) {
+	const saved = useStore((s) => s.savedWordIds.includes(entry.id));
+	const learned = useStore((s) => s.learnedWordIds.includes(entry.id));
+	const toggleSaved = useStore((s) => s.toggleSaved);
+	const toggleLearned = useStore((s) => s.toggleLearned);
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+		className: "space-y-4",
+		children: [
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+				className: "rounded-sm bg-surface px-2 py-0.5 text-xs font-medium text-muted",
+				children: KIND_LABEL[entry.kind]
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [
+				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
+					className: "font-serif text-2xl font-medium leading-snug",
+					children: entry.text
+				}),
+				entry.subtext ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+					className: "mt-1 font-serif text-xl text-fg/80",
+					children: entry.subtext
+				}) : null,
+				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+					className: "mt-2 text-sm text-subtle",
+					children: entry.pinyin
+				})
+			] }),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
+				className: "space-y-1",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h4", {
+					className: "text-xs font-medium tracking-wide text-muted",
+					children: "释义"
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+					className: "text-sm leading-relaxed",
+					children: entry.meaning
+				})]
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
+				className: "space-y-1",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h4", {
+					className: "text-xs font-medium tracking-wide text-muted",
+					children: "用法"
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+					className: "text-sm leading-relaxed",
+					children: entry.usage
+				})]
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+				className: "text-xs text-subtle",
+				children: entry.source
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				className: "flex flex-wrap gap-2 pt-2",
+				children: [
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button, {
+						variant: saved ? "subtle" : "outline",
+						onClick: () => toggleSaved(entry.id),
+						children: saved ? "已收藏" : "收藏"
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button, {
+						variant: learned ? "subtle" : "outline",
+						onClick: () => toggleLearned(entry.id),
+						children: learned ? "已识" : "标为已识"
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button, {
+						variant: "ghost",
+						onClick: onClose,
+						children: "关闭"
+					})
+				]
+			})
+		]
+	});
+}
+var LEXICON = [
+	{
+		id: "v-qu",
+		kind: "verse",
+		text: "问渠那得清如许",
+		subtext: "为有源头活水来",
+		pinyin: "wèn qú nǎ dé qīng rú xǔ / wèi yǒu yuán tóu huó shuǐ lái",
+		meaning: "水为何如此澄澈？因为源头不断有活水注入。借读书不断汲取新知，心才能澄明。",
+		usage: "写学习、创作或自我更新：思路要清，先得让源头活水进来，而不是反复翻煮旧稿。",
+		source: "朱熹《观书有感》"
+	},
+	{
+		id: "v-lu",
+		kind: "verse",
+		text: "路漫漫其修远兮",
+		subtext: "吾将上下而求索",
+		pinyin: "lù màn màn qí xiū yuǎn xī / wú jiāng shàng xià ér qiú suǒ",
+		meaning: "道路漫长遥远，我仍要上天下地去追寻。求索本身即是志向。",
+		usage: "用于长期目标、研究或自我修养，强调过程而非捷径。",
+		source: "屈原《离骚》"
+	},
+	{
+		id: "v-kui",
+		kind: "verse",
+		text: "不积跬步",
+		subtext: "无以至千里",
+		pinyin: "bù jī kuǐ bù / wú yǐ zhì qiān lǐ",
+		meaning: "半步都不积累，便到不了千里。大事由至微处叠成。",
+		usage: "谈习惯、训练、写作：今天这一格打卡，便是跬步。",
+		source: "荀子《劝学》"
+	},
+	{
+		id: "v-xi",
+		kind: "verse",
+		text: "昨夜西风凋碧树",
+		subtext: "独上高楼，望尽天涯路",
+		pinyin: "zuó yè xī fēng diāo bì shù / dú shàng gāo lóu, wàng jìn tiān yá lù",
+		meaning: "王国维所谓治学第一境：立志时要能望远，不怕眼前凋零。",
+		usage: "形容立定方向、甘于清冷的开始，不宜只当悲秋来用。",
+		source: "晏殊《蝶恋花》"
+	},
+	{
+		id: "v-yi",
+		kind: "verse",
+		text: "衣带渐宽终不悔",
+		subtext: "为伊消得人憔悴",
+		pinyin: "yī dài jiàn kuān zhōng bù huǐ / wèi yī xiāo dé rén qiáo cuì",
+		meaning: "第二境：认定一事，瘦了也不悔。对象可以是人，也可以是学问。",
+		usage: "写执着：把「伊」换成你真正要做成的事，语气才沉得住。",
+		source: "柳永《蝶恋花》"
+	},
+	{
+		id: "v-lan",
+		kind: "verse",
+		text: "众里寻他千百度",
+		subtext: "蓦然回首，那人却在，灯火阑珊处",
+		pinyin: "zhòng lǐ xún tā qiān bǎi dù / mò rán huí shǒu, nà rén què zài, dēng huǒ lán shān chù",
+		meaning: "第三境：功夫做足之后，答案往往在最不喧闹的地方。阑珊：将尽、疏落。",
+		usage: "「灯火阑珊」可单用，指热闹退后的清冷，也指顿悟来临的位置。",
+		source: "辛弃疾《青玉案·元夕》"
+	},
+	{
+		id: "v-yun",
+		kind: "verse",
+		text: "行到水穷处",
+		subtext: "坐看云起时",
+		pinyin: "xíng dào shuǐ qióng chù / zuò kàn yún qǐ shí",
+		meaning: "路走到水源尽头，便坐下看云生起。穷尽处不是绝境，是转换。",
+		usage: "安慰卡滞、计划落空：先停，再看。语气要缓，不要写成鸡汤口号。",
+		source: "王维《终南别业》"
+	},
+	{
+		id: "v-zhi",
+		kind: "verse",
+		text: "纸上得来终觉浅",
+		subtext: "绝知此事要躬行",
+		pinyin: "zhǐ shàng dé lái zhōng jué qiǎn / jué zhī cǐ shì yào gōng xíng",
+		meaning: "书本所得终究浮浅，真知必须亲自去做。",
+		usage: "习惯追踪的本意：知道「该早起」不算，起身那一下才算。",
+		source: "陆游《冬夜读书示子聿》"
+	},
+	{
+		id: "v-fan",
+		kind: "verse",
+		text: "沉舟侧畔千帆过",
+		subtext: "病树前头万木春",
+		pinyin: "chén zhōu cè pàn qiān fān guò / bìng shù qián tou wàn mù chūn",
+		meaning: "沉船旁边仍有千帆，病树前面已是新林。衰败不是世界的句号。",
+		usage: "写中年、失败、旧系统被替代：不要自居沉舟，也可以做那千帆之一。",
+		source: "刘禹锡《酬乐天扬州初逢席上见赠》"
+	},
+	{
+		id: "v-sha",
+		kind: "verse",
+		text: "千淘万漉虽辛苦",
+		subtext: "吹尽狂沙始到金",
+		pinyin: "qiān táo wàn lù suī xīn kǔ / chuī jìn kuáng shā shǐ dào jīn",
+		meaning: "反复淘洗才见真金。辛苦是筛选，不是惩罚。",
+		usage: "改稿、训练、研究：强调过程里被吹走的是沙，不是自己。",
+		source: "刘禹锡《浪淘沙》"
+	},
+	{
+		id: "v-zhu",
+		kind: "verse",
+		text: "竹杖芒鞋轻胜马",
+		subtext: "谁怕？一蓑烟雨任平生",
+		pinyin: "zhú zhàng máng xié qīng shèng mǎ / shuí pà? yì suō yān yǔ rèn píng shēng",
+		meaning: "竹杖草鞋比马更轻快。披一袭蓑衣，烟雨里走完一生也不怕。",
+		usage: "写从容：重点在「任」，不是硬扛。语气宜淡。",
+		source: "苏轼《定风波》"
+	},
+	{
+		id: "v-xiang",
+		kind: "verse",
+		text: "此心安处是吾乡",
+		subtext: void 0,
+		pinyin: "cǐ xīn ān chù shì wú xiāng",
+		meaning: "心能安放的地方，便是故乡。乡不在籍贯，在安顿。",
+		usage: "迁居、旅居、职业转换时用。短句独立，不必硬对下联。",
+		source: "苏轼《定风波·南海归赠王定国侍人寓娘》"
+	},
+	{
+		id: "v-ling",
+		kind: "verse",
+		text: "会当凌绝顶",
+		subtext: "一览众山小",
+		pinyin: "huì dāng líng jué dǐng / yī lǎn zhòng shān xiǎo",
+		meaning: "终有一日登上最高处，眼底群山便小了。凌：升高、超越。",
+		usage: "立志可引用；日常里更适合表示把视野抬高一层，而不是自负。",
+		source: "杜甫《望岳》"
+	},
+	{
+		id: "v-feng",
+		kind: "verse",
+		text: "长风破浪会有时",
+		subtext: "直挂云帆济沧海",
+		pinyin: "cháng fēng pò làng huì yǒu shí / zhí guà yún fān jì cāng hǎi",
+		meaning: "终有乘长风破浪之日，挂上云帆横渡大海。",
+		usage: "用于低谷期的自我期许。注意「会有时」是信念，不是时间表。",
+		source: "李白《行路难》"
+	},
+	{
+		id: "v-liu",
+		kind: "verse",
+		text: "山重水复疑无路",
+		subtext: "柳暗花明又一村",
+		pinyin: "shān chóng shuǐ fù yí wú lù / liǔ àn huā míng yòu yī cūn",
+		meaning: "山水叠阻像是无路，转过一弯又见村落花树。",
+		usage: "比「车到山前」更有画面。适合叙述困境中的转机，不要用滥。",
+		source: "陆游《游山西村》"
+	},
+	{
+		id: "v-xiuzhou",
+		kind: "verse",
+		text: "南风知我意",
+		subtext: "吹梦到西洲",
+		pinyin: "nán fēng zhī wǒ yì / chuī mèng dào xī zhōu",
+		meaning: "南风懂我心思，把梦吹到西洲。情意不直言，假风送达。",
+		usage: "写思念、托付、柔和的愿望。西洲不必坐实为地名。",
+		source: "南朝乐府《西洲曲》"
+	},
+	{
+		id: "v-ke",
+		kind: "verse",
+		text: "人生天地间",
+		subtext: "忽如远行客",
+		pinyin: "rén shēng tiān dì jiān / hū rú yuǎn xíng kè",
+		meaning: "人在天地之间，恍然像远行的过客。忽：迅速、不经意。",
+		usage: "谈时间、旅居、珍惜。比「人生如寄」更有脚步声。",
+		source: "《古诗十九首·青青陵上柏》"
+	},
+	{
+		id: "v-xing",
+		kind: "verse",
+		text: "玲珑骰子安红豆",
+		subtext: "入骨相思知不知",
+		pinyin: "líng lóng shǎi zi ān hóng dòu / rù gǔ xiāng sī zhī bù zhī",
+		meaning: "空心骰子里嵌一粒红豆，相思已入骨，你可知道。",
+		usage: "写深切却含蓄的想念。玲珑：空明剔透，这里是骰子的镂空。",
+		source: "温庭筠《南歌子词二首》"
+	},
+	{
+		id: "v-qingping",
+		kind: "verse",
+		text: "风起于青萍之末",
+		subtext: "浪成于微澜之间",
+		pinyin: "fēng qǐ yú qīng píng zhī mò",
+		meaning: "风从浮萍的末梢开始。大事往往起于几乎看不见的扰动。",
+		usage: "谈苗头、趋势、微小习惯。后半「浪成于微澜」为常用引申，出典在宋玉。",
+		source: "宋玉《风赋》"
+	},
+	{
+		id: "v-shanqi",
+		kind: "verse",
+		text: "山气日夕佳",
+		subtext: "飞鸟相与还",
+		pinyin: "shān qì rì xī jiā / fēi niǎo xiāng yǔ huán",
+		meaning: "傍晚山气最好，飞鸟结伴归巢。佳在气息，不在奇景。",
+		usage: "写归处、日常之美、收工时刻。适合日记收束。",
+		source: "陶渊明《饮酒·其五》"
+	},
+	{
+		id: "i-wei",
+		kind: "idiom",
+		text: "韦编三绝",
+		pinyin: "wéi biān sān jué",
+		meaning: "孔子读《周易》，穿竹简的皮绳断了三次。后指读书勤奋、反复研读。",
+		usage: "「这部稿子被他韦编三绝地改过」略重；更自然是「对经典有韦编三绝的功夫」。",
+		source: "《史记·孔子世家》"
+	},
+	{
+		id: "i-hanying",
+		kind: "idiom",
+		text: "含英咀华",
+		pinyin: "hán yīng jǔ huá",
+		meaning: "把花英含在口中细嚼。比喻品味诗文中的精华。",
+		usage: "适合阅读、审美：今天的词句，不求多，求含英咀华。",
+		source: "韩愈《进学解》"
+	},
+	{
+		id: "i-qian",
+		kind: "idiom",
+		text: "朝乾夕惕",
+		pinyin: "zhāo qián xī tì",
+		meaning: "白天勤奋，夜晚戒惧。乾：自强；惕：警惕。指终日谨慎不懈。",
+		usage: "自我要求或评价他人治事：「朝乾夕惕，不敢稍懈。」比「兢兢业业」更书面。",
+		source: "《周易·乾》"
+	},
+	{
+		id: "i-rijiu",
+		kind: "idiom",
+		text: "日就月将",
+		pinyin: "rì jiù yuè jiāng",
+		meaning: "每天有成就，每月有进益。就：趋、成；将：前进。",
+		usage: "谈积累极贴切。可作鼓励：「但能日就月将，不必求一日千里。」",
+		source: "《诗经·周颂·敬之》"
+	},
+	{
+		id: "i-kun",
+		kind: "idiom",
+		text: "困知勉行",
+		pinyin: "kùn zhī miǎn xíng",
+		meaning: "遇到困难才去求知，勉力去实行。虽非生而知之，仍可抵达。",
+		usage: "给自己打气：资质普通也不妨困知勉行。语出《中庸》为学次序。",
+		source: "《礼记·中庸》"
+	},
+	{
+		id: "i-bo",
+		kind: "idiom",
+		text: "博观约取",
+		pinyin: "bó guān yuē qǔ",
+		meaning: "广泛阅览，提炼要点。约：简约、约束。",
+		usage: "读书方法：「博观约取，厚积薄发。」可拆开单用「约取」。",
+		source: "苏轼《稼说送张琥》"
+	},
+	{
+		id: "i-hong",
+		kind: "idiom",
+		text: "闳中肆外",
+		pinyin: "hóng zhōng sì wài",
+		meaning: "内容宏富，文辞奔放。闳：大；肆：展开。",
+		usage: "评文章、设计、讲演：内里要闳，外表才能肆，不然只是张扬。",
+		source: "韩愈《进学解》"
+	},
+	{
+		id: "i-jiwei",
+		kind: "idiom",
+		text: "积微成著",
+		pinyin: "jī wēi chéng zhù",
+		meaning: "细微处积累，终会显著。著：明显。",
+		usage: "习惯、理财、健身都可用。比「积少成多」更书面、更有过程感。",
+		source: "《荀子·大略》 / 《汉书》"
+	},
+	{
+		id: "i-peng",
+		kind: "idiom",
+		text: "蓬生麻中",
+		pinyin: "péng shēng má zhōng",
+		meaning: "蓬草长在麻里，不用扶也长得直。环境能矫正资质。",
+		usage: "谈交友、团队、阅读环境。全句常作「蓬生麻中，不扶而直」。",
+		source: "《荀子·劝学》"
+	},
+	{
+		id: "i-mian",
+		kind: "idiom",
+		text: "黾勉从事",
+		pinyin: "mǐn miǎn cóng shì",
+		meaning: "努力做事。黾勉：勤勉、尽力，音不读「电」。",
+		usage: "自谦或评价：「惟有黾勉从事，以求无愧。」书面信、年终回顾好用。",
+		source: "《诗经·小雅·十月之交》"
+	},
+	{
+		id: "i-guang",
+		kind: "idiom",
+		text: "刮垢磨光",
+		pinyin: "guā gòu mó guāng",
+		meaning: "刮去污垢，打磨出光泽。指切磋学问、砥砺品行。",
+		usage: "改文章、修技艺：「再刮垢磨光一遍。」注意磨光不是炫耀。",
+		source: "韩愈《进学解》"
+	},
+	{
+		id: "i-lin",
+		kind: "idiom",
+		text: "临渊羡鱼",
+		pinyin: "lín yuān xiàn yú",
+		meaning: "站在深潭边羡慕鱼，不如回去织网。空羡慕无济于事。",
+		usage: "劝行动。可接「不如退而结网」。比「光说不练」雅。",
+		source: "《汉书·董仲舒传》"
+	},
+	{
+		id: "i-mu",
+		kind: "idiom",
+		text: "目无全牛",
+		pinyin: "mù wú quán niú",
+		meaning: "庖丁眼中不再是整头牛，而是肌理缝隙。技艺纯熟到看穿结构。",
+		usage: "夸专业直觉。不要写成「目中无人」。",
+		source: "《庄子·养生主》"
+	},
+	{
+		id: "i-hanzhang",
+		kind: "idiom",
+		text: "含章可贞",
+		pinyin: "hán zhāng kě zhēn",
+		meaning: "内含文采美质，守正即可。章：文采；贞：正而固。",
+		usage: "赞美含蓄的才华，不必外露。亦可自勉：先把底子养厚。",
+		source: "《周易·坤》"
+	},
+	{
+		id: "i-zao",
+		kind: "idiom",
+		text: "凿壁偷光",
+		pinyin: "záo bì tōu guāng",
+		meaning: "匡衡凿墙借邻家灯火读书。后指家贫而勤学。",
+		usage: "可比喻借资源学习，语气带一点自嘲或敬意，不宜对富者滥用。",
+		source: "《西京杂记》"
+	},
+	{
+		id: "i-yugu",
+		kind: "idiom",
+		text: "玉汝于成",
+		pinyin: "yù rǔ yú chéng",
+		meaning: "像琢玉一样打磨你，使你有成。艰难是成全。",
+		usage: "安慰挫折：「艰难玉汝于成。」出典张载「贫贱忧戚，庸玉汝于成也」。",
+		source: "张载《西铭》"
+	},
+	{
+		id: "i-qianxu",
+		kind: "idiom",
+		text: "虚怀若谷",
+		pinyin: "xū huái ruò gǔ",
+		meaning: "胸怀像山谷一样空阔，能容能受。",
+		usage: "评人、自省。比「谦虚」多一层空间感：谷是空的，所以能回声。",
+		source: "《老子》"
+	},
+	{
+		id: "i-houji",
+		kind: "idiom",
+		text: "厚积薄发",
+		pinyin: "hòu jī bó fā",
+		meaning: "积累要厚，发用要精。不是藏着不发，是发时有本钱。",
+		usage: "学习与创作的节奏。可与「博观约取」成对。",
+		source: "苏轼论学（后起凝固）"
+	},
+	{
+		id: "i-chuo",
+		kind: "idiom",
+		text: "踔厉风发",
+		pinyin: "chuō lì fēng fā",
+		meaning: "精神振奋，议论才思奔涌。踔厉：腾跃奋起。",
+		usage: "写青年气、讨论现场。勿与「飞扬跋扈」混。",
+		source: "韩愈《柳子厚墓志铭》"
+	},
+	{
+		id: "w-yinyin",
+		kind: "word",
+		text: "氤氲",
+		pinyin: "yīn yūn",
+		meaning: "烟云、香气或光色混融弥漫的样子。也可指天地之气交合。",
+		usage: "「茶烟氤氲」「晓色氤氲」。不要写成烟雾报警器式的浓。它是融，不是呛。",
+		source: "《文选》及后世诗文"
+	},
+	{
+		id: "w-qianquan",
+		kind: "word",
+		text: "缱绻",
+		pinyin: "qiǎn quǎn",
+		meaning: "情意缠绵、难分难解。绻：弯曲、留恋。",
+		usage: "「情意缱绻」多用于人。也可写对故地、旧书的不舍，但要克制。",
+		source: "《诗经》毛传 / 诗文常用"
+	},
+	{
+		id: "w-chanyuan",
+		kind: "word",
+		text: "潺湲",
+		pinyin: "chán yuán",
+		meaning: "水慢慢流的样子，声音也含在字里。",
+		usage: "「溪水潺湲」。写文时可用它代替「哗啦啦」，立刻从口语进入书面。",
+		source: "屈原《九歌·湘夫人》"
+	},
+	{
+		id: "w-yili",
+		kind: "word",
+		text: "迤逦",
+		pinyin: "yǐ lǐ",
+		meaning: "曲折连绵。可指路、山、队伍、思绪。",
+		usage: "「山路迤逦向南」。比「弯弯曲曲」多一层延展的从容。",
+		source: "古诗文常用"
+	},
+	{
+		id: "w-lanshan",
+		kind: "word",
+		text: "阑珊",
+		pinyin: "lán shān",
+		meaning: "将尽、衰残、疏落。灯火、意兴、春意都可阑珊。",
+		usage: "「意兴阑珊」指兴致将尽。不要和「栏杆」的栏搞混。",
+		source: "唐宋词"
+	},
+	{
+		id: "w-qiongyin",
+		kind: "word",
+		text: "跫音",
+		pinyin: "qióng yīn",
+		meaning: "脚步声。跫：足踏地的声音。",
+		usage: "「空谷跫音」指寂寞中忽然来的人声。比「脚步声」更荒凉、更珍贵。",
+		source: "《庄子·徐无鬼》"
+	},
+	{
+		id: "w-weirui",
+		kind: "word",
+		text: "葳蕤",
+		pinyin: "wēi ruí",
+		meaning: "草木茂盛、枝叶下垂纷披的样子。也可指华美。",
+		usage: "「春草葳蕤」。两个字都带草字头，写植物最稳，写服饰要谨慎。",
+		source: "汉赋、唐诗"
+	},
+	{
+		id: "w-lingling",
+		kind: "word",
+		text: "泠泠",
+		pinyin: "líng líng",
+		meaning: "清凉；或声音清越。叠字把质感拉长。",
+		usage: "「风泠泠」「琴声泠泠」。不要写成冷冰冰，它清，不厉。",
+		source: "《楚辞》 / 陆机《招隐诗》"
+	},
+	{
+		id: "w-kongzong",
+		kind: "word",
+		text: "倥偬",
+		pinyin: "kǒng zǒng",
+		meaning: "事务急迫忙碌。常作「戎马倥偬」「倥偬不暇」。",
+		usage: "写忙碌的书面说法。比「忙得脚不沾地」更干净。",
+		source: "《楚辞》及史传"
+	},
+	{
+		id: "w-aidai",
+		kind: "word",
+		text: "叆叇",
+		pinyin: "ài dài",
+		meaning: "云盛而暗的样子；后也指眼镜（叆叇即眼镜的别称）。",
+		usage: "写云：「阴云叆叇」。作眼镜解时带一点文言趣味，适合札记。",
+		source: "汉赋 / 后世笔记"
+	},
+	{
+		id: "w-yini",
+		kind: "word",
+		text: "旖旎",
+		pinyin: "yǐ nǐ",
+		meaning: "柔美、盛好。多写风光或风情。",
+		usage: "「春光旖旎」。太甜时会俗，配一点克制的景物就稳。",
+		source: "汉赋"
+	},
+	{
+		id: "w-hangxie",
+		kind: "word",
+		text: "沆瀣",
+		pinyin: "hàng xiè",
+		meaning: "夜间的水汽、露气。后有「沆瀣一气」，指气味相投（今多贬）。",
+		usage: "本义很美：「吸沆瀣」。成语义已变，用时要看语境褒贬。",
+		source: "《楚辞·远游》 / 《汉书》"
+	},
+	{
+		id: "w-pini",
+		kind: "word",
+		text: "睥睨",
+		pinyin: "pì nì",
+		meaning: "斜着眼看，有傲视、旁观的意味。",
+		usage: "「睥睨一世」语气很强。日常可写「他睥睨着那份名单」，带不屑。",
+		source: "史传、诗文"
+	},
+	{
+		id: "w-qinghuan",
+		kind: "word",
+		text: "清欢",
+		pinyin: "qīng huān",
+		meaning: "清淡而真的欢愉。不是狂欢，是茶、月、闲步那种。",
+		usage: "苏轼「人间有味是清欢」。可作生活美学的点题，切忌写成广告词。",
+		source: "苏轼《浣溪沙》"
+	},
+	{
+		id: "w-rongyu",
+		kind: "word",
+		text: "容与",
+		pinyin: "róng yǔ",
+		meaning: "从容徘徊，安闲自得。水波、舟、心境都可容与。",
+		usage: "「容与中流」。写不急：人在事里，但步点没乱。",
+		source: "《楚辞·九歌》"
+	},
+	{
+		id: "w-yiyou",
+		kind: "word",
+		text: "夷犹",
+		pinyin: "yí yóu",
+		meaning: "迟疑不进；也指从容不迫。需靠上下文定解。",
+		usage: "楚辞里常是徘徊不前。用时补一个画面，避免歧义。",
+		source: "《楚辞·九歌·湘君》"
+	},
+	{
+		id: "w-chongdan",
+		kind: "word",
+		text: "冲淡",
+		pinyin: "chōng dàn",
+		meaning: "平和、闲远，不浓烈。司空图二十四诗品之一。",
+		usage: "评风格、为人：「冲淡而有骨」。冲淡不是稀薄，是把火候收住。",
+		source: "司空图《二十四诗品》"
+	},
+	{
+		id: "w-shukuang",
+		kind: "word",
+		text: "疏狂",
+		pinyin: "shū kuáng",
+		meaning: "不受拘束、狂放而不细密。疏是稀、是放。",
+		usage: "「少年疏狂」。可自嘲，也可怀人。比「狂」多一层不修边幅。",
+		source: "宋词常用"
+	},
+	{
+		id: "w-qingyue",
+		kind: "word",
+		text: "清樾",
+		pinyin: "qīng yuè",
+		meaning: "清凉的树荫。樾：道旁林荫。",
+		usage: "「坐在清樾里把信写完」。一个字把树荫从口语里救出来。",
+		source: "唐宋诗文"
+	},
+	{
+		id: "w-lianyan",
+		kind: "word",
+		text: "潋滟",
+		pinyin: "liàn yàn",
+		meaning: "水波闪动、盈溢的样子。",
+		usage: "「水光潋滟晴方好」。写杯中酒、湖面、甚至目光，都要留一点光。",
+		source: "苏轼《饮湖上初晴后雨》"
+	},
+	{
+		id: "w-xuran",
+		kind: "word",
+		text: "欻然",
+		pinyin: "xū rán",
+		meaning: "忽然。欻：快速。带一点风声。",
+		usage: "「欻然醒了」。比「突然」更像文言里的抽气声。",
+		source: "汉赋、杜甫诗"
+	},
+	{
+		id: "q-rixin",
+		kind: "quote",
+		text: "苟日新，日日新，又日新",
+		pinyin: "gǒu rì xīn, rì rì xīn, yòu rì xīn",
+		meaning: "如果一天能自新，就该天天自新，并且持续自新。新是动词，是洗。",
+		usage: "作座右铭极稳。强调的是反复，不是花样。",
+		source: "《礼记·大学》引汤之盘铭"
+	},
+	{
+		id: "q-tianxing",
+		kind: "quote",
+		text: "天行健，君子以自强不息",
+		pinyin: "tiān xíng jiàn, jūn zǐ yǐ zì qiáng bù xī",
+		meaning: "天的运行刚健不止，人因此自我奋发，不中断。",
+		usage: "「不息」是关键词：强度其次，中断才是敌人。",
+		source: "《周易·乾·象》"
+	},
+	{
+		id: "q-haozhi",
+		kind: "quote",
+		text: "知之者不如好之者，好之者不如乐之者",
+		pinyin: "zhī zhī zhě bù rú hào zhī zhě, hào zhī zhě bù rú lè zhī zhě",
+		meaning: "知道不如喜好，喜好不如从中得乐。乐是最高的燃料。",
+		usage: "培养习惯：先找到乐处，比靠意志硬撑更久。",
+		source: "《论语·雍也》"
+	},
+	{
+		id: "q-sixue",
+		kind: "quote",
+		text: "学而不思则罔，思而不学则殆",
+		pinyin: "xué ér bù sī zé wǎng, sī ér bù xué zé dài",
+		meaning: "只学不思会迷茫，只思不学会危殆。罔：无所得；殆：危险、疲殆。",
+		usage: "读书与想问题要互为出口。可用于讨论信息过载。",
+		source: "《论语·为政》"
+	},
+	{
+		id: "q-youya",
+		kind: "quote",
+		text: "吾生也有涯，而知也无涯",
+		pinyin: "wú shēng yě yǒu yá, ér zhī yě wú yá",
+		meaning: "生命有限，知识无限。庄子接着说，以有涯随无涯，殆已——要会停。",
+		usage: "引用时最好带着后半的警戒，才不是鸡汤。",
+		source: "《庄子·养生主》"
+	},
+	{
+		id: "q-hongyi",
+		kind: "quote",
+		text: "士不可以不弘毅，任重而道远",
+		pinyin: "shì bù kě yǐ bù hóng yì, rèn zhòng ér dào yuǎn",
+		meaning: "人要弘大而坚毅，因为担子重、路也长。弘是容量，毅是持久。",
+		usage: "自我期许。弘毅不是嗓门大，是扛得住。",
+		source: "《论语·泰伯》"
+	},
+	{
+		id: "q-dushi",
+		kind: "quote",
+		text: "博学之，审问之，慎思之，明辨之，笃行之",
+		pinyin: "bó xué zhī, shěn wèn zhī, shèn sī zhī, míng biàn zhī, dǔ xíng zhī",
+		meaning: "广博地学，审慎地问，慎重地想，明晰地辨，切实地做。五步缺一不可。",
+		usage: "可作学习流程。笃行对应打卡：前面四步若没有落在行上，仍是空的。",
+		source: "《礼记·中庸》"
+	},
+	{
+		id: "q-ningjing",
+		kind: "quote",
+		text: "非淡泊无以明志，非宁静无以致远",
+		pinyin: "fēi dàn bó wú yǐ míng zhì, fēi níng jìng wú yǐ zhì yuǎn",
+		meaning: "不把名利看淡，志向看不清；心不静，走不远。",
+		usage: "谈选择、减少干扰。淡泊是手段，明志才是目的。",
+		source: "诸葛亮《诫子书》"
+	},
+	{
+		id: "q-sushi",
+		kind: "quote",
+		text: "古之立大事者，不惟有超世之才，亦必有坚忍不拔之志",
+		pinyin: "gǔ zhī lì dà shì zhě, bù wéi yǒu chāo shì zhī cái, yì bì yǒu jiān rěn bù bá zhī zhì",
+		meaning: "成大事不只靠出众才能，还必有拔不掉的志。坚忍是志的形状。",
+		usage: "长句子适合放在文末。口语里可缩成「才之外，还要志」。",
+		source: "苏轼《晁错论》"
+	},
+	{
+		id: "q-laozi",
+		kind: "quote",
+		text: "合抱之木，生于毫末；九层之台，起于累土",
+		pinyin: "hé bào zhī mù, shēng yú háo mò",
+		meaning: "合抱的树从嫩芽来，九层台从一筐土来。大来自小，且必须开始。",
+		usage: "习惯的哲学表述。可与「不积跬步」互文，避免同一段里堆砌。",
+		source: "《老子》第六十四章"
+	},
+	{
+		id: "q-wuwei",
+		kind: "quote",
+		text: "勿以善小而不为，勿以恶小而为之",
+		pinyin: "wù yǐ shàn xiǎo ér bù wéi, wù yǐ è xiǎo ér wéi zhī",
+		meaning: "善不因小就不做，恶不因小就可以做。小是习惯的单位。",
+		usage: "适合今日打卡的旁注。善小：回一条消息、读完一首诗。",
+		source: "《三国志》刘备遗诏"
+	},
+	{
+		id: "q-aristotle",
+		kind: "quote",
+		text: "卓越不是一种行为，而是一种习惯",
+		pinyin: "zhuó yuè bù shì yì zhǒng xíng wéi, ér shì yì zhǒng xí guàn",
+		meaning: "人是反复行动所造就的。一次把事做对，叫行为；一直做对，才叫卓越。",
+		usage: "英译常用 We are what we repeatedly do。适合谈训练与性格。",
+		source: "亚里士多德（Will Durant 转述）"
+	},
+	{
+		id: "q-seneca",
+		kind: "quote",
+		text: "我们拥有的时间并不短，是我们浪费了太多",
+		pinyin: "wǒ men yōng yǒu de shí jiān bìng bù duǎn",
+		meaning: "生命长度往往够用，漏掉的是被切碎的注意力。",
+		usage: "谈拖延、无目的滑动屏幕。比「时间管理」更刺一点。",
+		source: "塞涅卡《论生命之短暂》"
+	},
+	{
+		id: "q-aurelius",
+		kind: "quote",
+		text: "你随时都可能离开人世，让这件事决定你此刻的言行与思想",
+		pinyin: "nǐ suí shí dōu kě néng lí kāi rén shì",
+		meaning: "死亡不是恐吓，是过滤器：把不值得做的事滤掉。",
+		usage: "用于做减法。语气要平静，不要写成鸡血。",
+		source: "马可·奥勒留《沉思录》"
+	},
+	{
+		id: "q-weil",
+		kind: "quote",
+		text: "注意力是最稀有、最纯粹的慷慨",
+		pinyin: "zhù yì lì shì zuì xī yǒu, zuì chún cuì de kāng kǎi",
+		meaning: "把完整的注意给人、给事，比礼物更难得。",
+		usage: "谈阅读、交谈、练习。可与「笃行」对照：先能注意，才能行。",
+		source: "西蒙娜·韦伊"
+	},
+	{
+		id: "q-confucius-san",
+		kind: "quote",
+		text: "三人行，必有我师焉",
+		pinyin: "sān rén xíng, bì yǒu wǒ shī yān",
+		meaning: "几个人同行，其中必有可学之处。择其善者而从，其不善者而改。",
+		usage: "完整引用含后句，才不是客套。",
+		source: "《论语·述而》"
+	},
+	{
+		id: "q-menci",
+		kind: "quote",
+		text: "故天将降大任于是人也，必先苦其心志，劳其筋骨",
+		pinyin: "gù tiān jiāng jiàng dà rèn yú shì rén yě",
+		meaning: "承担之前先被打磨。孟子列的是心志、筋骨、体肤、空乏，是一套训练。",
+		usage: "引用时避免把一切苦难都解释成天选，那会冷漠。",
+		source: "《孟子·告子下》"
+	},
+	{
+		id: "w-qinggong",
+		kind: "word",
+		text: "清供",
+		pinyin: "qīng gòng",
+		meaning: "清雅的供设：一枝花、一块石、一盘果。也指清淡的食物。",
+		usage: "「案头清供」。把生活里的小布置说得像有仪式，却不喧闹。",
+		source: "宋人笔记、画论"
+	},
+	{
+		id: "w-jixin",
+		kind: "word",
+		text: "机杼",
+		pinyin: "jī zhù",
+		meaning: "织布机；引申为作文的命意与组织，即「自出机杼」。",
+		usage: "「文章要有自己的机杼」。谈原创比「灵感」更结构。",
+		source: "《魏书·祖莹传》"
+	},
+	{
+		id: "w-jifeng",
+		kind: "word",
+		text: "机锋",
+		pinyin: "jī fēng",
+		meaning: "禅宗里迅疾而尖锐的问答；后指语言里的锋芒与机智。",
+		usage: "「话里带机锋」。适合评对白、短评，不要变成讽刺的借口。",
+		source: "禅宗语录"
+	},
+	{
+		id: "i-jingwei",
+		kind: "idiom",
+		text: "经纬万端",
+		pinyin: "jīng wěi wàn duān",
+		meaning: "纵横交错，头绪极多。经为纵，纬为横。",
+		usage: "写复杂局面。比「乱七八糟」有秩序感：乱，但是织得出来的乱。",
+		source: "史论常用"
+	},
+	{
+		id: "v-mozhe",
+		kind: "verse",
+		text: "莫听穿林打叶声",
+		subtext: "何妨吟啸且徐行",
+		pinyin: "mò tīng chuān lín dǎ yè shēng / hé fáng yín xiào qiě xú xíng",
+		meaning: "别去听雨打树叶的声音，不妨边走边吟。徐行：把步子放慢。",
+		usage: "谈处变：不是听不见，是不让声音牵着走。",
+		source: "苏轼《定风波》"
+	},
+	{
+		id: "v-buyu",
+		kind: "verse",
+		text: "不畏浮云遮望眼",
+		subtext: "自缘身在最高层",
+		pinyin: "bù wèi fú yún zhē wàng yǎn / zì yuán shēn zài zuì gāo céng",
+		meaning: "不怕浮云挡住视线，是因为人已经站在最高层。",
+		usage: "谈格局。注意：先登高，才说不畏。顺序反了就成了口号。",
+		source: "王安石《登飞来峰》"
+	}
+];
+function dailyEntry(date = /* @__PURE__ */ new Date()) {
+	const key = toKey(date);
+	let hash = 2166136261;
+	for (let i = 0; i < key.length; i++) {
+		hash ^= key.charCodeAt(i);
+		hash = Math.imul(hash, 16777619);
+	}
+	return LEXICON[Math.abs(hash) % LEXICON.length];
+}
+function searchLexicon(query, kind) {
+	const q = query.trim().toLowerCase();
+	return LEXICON.filter((e) => {
+		if (kind && kind !== "all" && e.kind !== kind) return false;
+		if (!q) return true;
+		return `${e.text}${e.subtext ?? ""}${e.pinyin}${e.meaning}${e.usage}${e.source}`.toLowerCase().includes(q);
+	});
+}
+//#endregion
+export { DialogTitle as a, WordCard as c, searchLexicon as d, DialogHeader as i, WordDetail as l, DialogContent as n, Input as o, DialogDescription as r, LEXICON as s, Dialog as t, dailyEntry as u };
