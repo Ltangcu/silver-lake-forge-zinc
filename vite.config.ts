@@ -1,5 +1,6 @@
 import { readdirSync } from "node:fs";
 import { join } from "node:path";
+import { fileURLToPath } from "node:url";
 import type { Plugin } from "vite";
 import { defineConfig } from "vite";
 import { tanstackStart } from "@tanstack/react-start/plugin/vite";
@@ -156,7 +157,14 @@ export default defineConfig(({ command, isPreview }) => ({
     port: 8081,
     strictPort: true,
   },
-    resolve: { tsconfigPaths: true },
+    resolve: {
+  tsconfigPaths: true,
+  alias: {
+    tslib: fileURLToPath(
+      new URL("./node_modules/tslib/tslib.es6.mjs", import.meta.url),
+    ),
+  },
+},
   
   plugins: [
     pgliteBootstrapPlugin(),
@@ -176,9 +184,6 @@ export default defineConfig(({ command, isPreview }) => ({
             // manifest + head-tag middleware). Nitro v3 defaults serverDir to
             // false, so removing this silently unwires /?install=1 on deploys.
             serverDir: "./server",
-            externals: {
-            inline: ["tslib"],
-            },
           }),
         ]
       : []),
