@@ -159,7 +159,7 @@ export default defineConfig(({ command, isPreview }) => ({
     resolve: { tsconfigPaths: true },
 
   ssr: {
-    noExternal: ["tslib"],
+    noExternal: [/^@radix-ui\//, "tslib"],
   },
 
   plugins: [
