@@ -156,7 +156,12 @@ export default defineConfig(({ command, isPreview }) => ({
     port: 8081,
     strictPort: true,
   },
-  resolve: { tsconfigPaths: true },
+    resolve: { tsconfigPaths: true },
+
+  ssr: {
+    noExternal: ["tslib"],
+  },
+
   plugins: [
     pgliteBootstrapPlugin(),
     // Before tanstackStart so /auth/popup never falls through to the SPA.
