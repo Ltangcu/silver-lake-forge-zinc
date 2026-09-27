@@ -177,7 +177,7 @@ export default defineConfig(({ command, isPreview }) => ({
             // false, so removing this silently unwires /?install=1 on deploys.
             serverDir: "./server",
             externals: {
-            traceInclude: ["tslib"],
+            inline: ["tslib"],
             },
           }),
         ]
