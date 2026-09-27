@@ -1,7 +1,7 @@
 import { createRootRoute, HeadContent, Outlet, Scripts } from "@tanstack/react-router";
 import { AuthProvider } from "@/lib/auth/provider";
 import { PreviewHostBridge } from "@/components/preview-host-bridge";
-import { AppShell } from "@/components/app-shell";
+import { RixinHydrate } from "@/components/rixin/hydrate";
 import appCss from "../styles.css?url";
 
 const APP_NAME = "日新";
@@ -12,14 +12,14 @@ export const Route = createRootRoute({
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: APP_NAME },
-      {
-        name: "description",
-        content: "日新：每日习惯打卡、连续日历，以及诗句、成语、雅词与名言。",
-      },
-      { name: "theme-color", content: "#3d5a4c" },
+      { name: "description", content: "每日打卡、连续日历与一词一句。" },
+      { name: "theme-color", content: "#F3EEE4" },
     ],
     links: [
       { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },
+      { rel: "stylesheet", href: appCss },
+      { rel: "manifest", href: "/__grok/manifest.webmanifest" },
+      { rel: "apple-touch-icon", href: "/__grok/icon-180.png" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       {
         rel: "preconnect",
@@ -30,16 +30,9 @@ export const Route = createRootRoute({
         rel: "stylesheet",
         href: "https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600&family=Noto+Serif+SC:wght@500;600;700&display=swap",
       },
-      { rel: "stylesheet", href: appCss },
-      { rel: "manifest", href: "/__grok/manifest.webmanifest" },
-      { rel: "apple-touch-icon", href: "/__grok/icon-180.png" },
     ],
   }),
-  component: RootDocument,
-});
-
-function RootDocument() {
-  return (
+  component: () => (
     <html lang="zh-CN" className="antialiased" suppressHydrationWarning>
       <head>
         <HeadContent />
@@ -47,12 +40,12 @@ function RootDocument() {
       <body>
         <PreviewHostBridge />
         <AuthProvider>
-          <AppShell>
+          <RixinHydrate>
             <Outlet />
-          </AppShell>
+          </RixinHydrate>
         </AuthProvider>
         <Scripts />
       </body>
     </html>
-  );
-}
+  ),
+});
